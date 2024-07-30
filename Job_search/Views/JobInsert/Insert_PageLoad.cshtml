@@ -1,0 +1,65 @@
+﻿@model Job_search.Models.Job
+@{
+    ViewBag.Title = "Insert_PageLoad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Insert_PageLoad</h2>
+
+<div>
+
+
+    @using (Html.BeginForm("Insert_Click", "JobInsert", FormMethod.Post))
+    {
+
+        <div>
+            <label>Company  ID:</label>
+        </div>
+
+        <div>
+            @Html.TextBoxFor(m => m.Company_id)
+            @Html.ValidationMessageFor(m => m.Company_id)
+
+        </div>
+
+        <div>
+            <label>Skills:</label>
+        </div>
+
+        <div>
+            @Html.TextBoxFor(m => m.Skills)
+            @Html.ValidationMessageFor(m => m.Skills)
+
+        </div>
+
+        <div>
+            <label>Experience:</label>
+        </div>
+
+        <div>
+            @Html.TextBoxFor(m => m.Experience)
+            @Html.ValidationMessageFor(m => m.Experience)
+
+        </div>
+
+        <div>
+            <label>Last_date:</label>
+        </div>
+
+        <div>
+            @Html.TextBoxFor(m => m.Last_date)
+      
+
+        </div>
+
+        <div>
+            <input type="submit" value="Insert" />
+
+           
+        </div>
+
+    }
+
+</div>
+
+

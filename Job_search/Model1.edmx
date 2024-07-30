@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MVC_PROJECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MVC_PROJECT.dbo.App_Id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="App_Id">
+          <Key>
+            <PropertyRef Name="App_Id" />
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="App_Id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Job_Id" Type="int" />
+          <Property Name="CV" Type="varchar" MaxLength="450" />
+          <Property Name="App_date" Type="varchar" MaxLength="50" />
+          <Property Name="App_Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Company_id" />
+          </Key>
+          <Property Name="Company_id" Type="int" Nullable="false" />
+          <Property Name="Skills" Type="varchar" MaxLength="250" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="Job_status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Login_tab">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Log_Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="sp_JInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="skills" Type="varchar" Mode="In" />
+          <Parameter Name="exp" Type="int" Mode="In" />
+          <Parameter Name="jbstatus" Type="varchar" Mode="In" />
+          <Parameter Name="ldate" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MVC_PROJECTModelStoreContainer">
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login_tab" EntityType="Self.Login_tab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="App_Id" EntityType="Self.App_Id" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [App_Id].[App_Id] AS [App_Id], 
+    [App_Id].[User_id] AS [User_id], 
+    [App_Id].[Job_Id] AS [Job_Id], 
+    [App_Id].[CV] AS [CV], 
+    [App_Id].[App_date] AS [App_date], 
+    [App_Id].[App_Status] AS [App_Status]
+    FROM [dbo].[App_Id] AS [App_Id]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVC_PROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Company_id" />
+          </Key>
+          <Property Name="Company_id" Type="Int32" Nullable="false" />
+          <Property Name="Skills" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="Job_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Login_tab">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Log_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="App_Id">
+          <Key>
+            <PropertyRef Name="App_Id1" />
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="App_Id1" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Job_Id" Type="Int32" />
+          <Property Name="CV" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="App_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="App_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MVC_PROJECTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Login_tab" EntityType="Self.Login_tab" />
+          <EntitySet Name="App_Id" EntityType="Self.App_Id" />
+          <FunctionImport Name="sp_JInsert">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="skills" Mode="In" Type="String" />
+            <Parameter Name="exp" Mode="In" Type="Int32" />
+            <Parameter Name="jbstatus" Mode="In" Type="String" />
+            <Parameter Name="ldate" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVC_PROJECTModelStoreContainer" CdmEntityContainer="MVC_PROJECTEntities">
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="MVC_PROJECTModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Company_id" ColumnName="Company_id" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Job_status" ColumnName="Job_status" />
+                <ScalarProperty Name="Last_date" ColumnName="Last_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login_tab">
+            <EntityTypeMapping TypeName="MVC_PROJECTModel.Login_tab">
+              <MappingFragment StoreEntitySet="Login_tab">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Log_Type" ColumnName="Log_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App_Id">
+            <EntityTypeMapping TypeName="MVC_PROJECTModel.App_Id">
+              <MappingFragment StoreEntitySet="App_Id">
+                <ScalarProperty Name="App_Id1" ColumnName="App_Id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Job_Id" ColumnName="Job_Id" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="App_date" ColumnName="App_date" />
+                <ScalarProperty Name="App_Status" ColumnName="App_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_JInsert" FunctionName="MVC_PROJECTModel.Store.sp_JInsert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
